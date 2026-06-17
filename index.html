@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cidadania Digital e IA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Cidadania Digital & Inteligência Artificial</h1>
+        <p>O Impacto das Deepfakes e da Desinformação na Sociedade</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>O que são Deepfakes?</h2>
+            <p>Deepfakes são vídeos, áudios ou imagens alterados de forma realista por meio de Inteligência Artificial. Embora a tecnologia seja fascinante, ela é frequentemente usada para criar desinformação (fake news), personificar indivíduos sem consentimento e manipular a opinião pública.</p>
+        </section>
+
+        <section class="card">
+            <h2>Como identificar Mídias Manipuladas?</h2>
+            <ul>
+                <li><strong>Piscadas de olhos não naturais:</strong> Muitas IAs falham em replicar o piscar normal.</li>
+                <li><strong>Erros de iluminação:</strong> Sombras e reflexos que não batem com o ambiente.</li>
+                <li><strong>Áudio desalinhado:</strong> Movimentos labiais que não sincronizam perfeitamente com a fala.</li>
+                <li><strong>Bordas borradas:</strong> Distorções ao redor do rosto, cabelo ou orelhas.</li>
+            </ul>
+        </section>
+
+        <section class="card quiz-section">
+            <h2>Desafio Interativo: Você sabe identificar a verdade?</h2>
+            <p>Se você receber um vídeo bombástico de uma celebridade pedindo dinheiro em uma rede social, o que você faz?</p>
+            
+            <div class="quiz-options">
+                <button onclick="verificarResposta(false)">A) Compartilho imediatamente com meus amigos.</button>
+                <button onclick="verificarResposta(true)">B) Desconfio, procuro em fontes oficiais e não compartilho.</button>
+                <button onclick="verificarResposta(false)">C) Comento no post dizendo que é verdade.</button>
+            </div>
+
+            <p id="resultado-quiz" class="resultado"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Projeto Escolar de Educação Digital e IA. #cidadaniadigital2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
