@@ -97,3 +97,89 @@ function calcularResultado() {
 
 // Inicializa o quiz ao carregar a página
 carregarQuiz();
+// Banco de dados com os casos do mini game
+const cenarioCasos = [
+    {
+        texto: "Você recebe um áudio do diretor da escola no grupo do WhatsApp pedindo para os alunos transferirem urgentemente R$ 10,00 via Pix para uma conta aleatória para pagar a manutenção das quadras. A voz parece perfeitamente a dele, mas o tom está um pouco robótico.",
+        eReal: false,
+        explicacao: "Isso é FAKE! Trata-se de uma tentativa de golpe usando clonagem de voz por IA (Deepfake de áudio). Diretores não pedem Pix urgentes para contas desconhecidas em redes sociais."
+    },
+    {
+        texto: "O portal oficial do Ministério da Saúde publica uma nota técnica assinada digitalmente por médicos renomados confirmando o início de uma nova campanha nacional de vacinação nas escolas públicas a partir da próxima segunda-feira.",
+        eReal: true,
+        explicacao: "Isso é FATO! Informações publicadas em portais governamentais oficiais (.gov.br) e assinadas digitalmente por canais institucionais são fontes seguras de veracidade."
+    },
+    {
+        texto: "Viraliza no TikTok um vídeo de um cientista famoso anunciando que descobriu a cura de uma doença grave usando apenas limão e alho. No vídeo, quando ele pisca, os olhos dele parecem duplicar por milésimos de segundo e o movimento da boca não bate perfeitamente com o som.",
+        eReal: false,
+        explicacao: "Isso é FAKE! Sincronia labial borrada e falhas visuais ao piscar ou virar de lado são sinais clássicos de que um vídeo passou por um algoritmo gerador de Deepfake."
+    }
+];
+
+let casoAtualIndex = 0;
+let pontuacao = 0;
+
+const cenarioTextoEl = document.getElementById('scenario-text');
+const scoreEl = document.getElementById('score');
+const currentCaseEl = document.getElementById('current-case');
+const feedbackModal = document.getElementById('feedback-modal');
+const feedbackTitleEl = document.getElementById('feedback-title');
+const feedbackTextEl = document.getElementById('feedback-text');
+const gameCard = document.getElementById('game-card');
+const endCard = document.getElementById('end-card');
+const finalMessageEl = document.getElementById('final-message');
+
+function carregarCaso() {
+    if (casoAtualIndex < cenarioCasos.length) {
+        cenarioTextoEl.innerText = cenarioCasos[casoAtualIndex].texto;
+        currentCaseEl.innerText = casoAtualIndex + 1;
+    } else {
+        finalizarJogo();
+    }
+}
+
+function verificarEscolha(escolhaUsuario) {
+    const casoAtual = cenarioCasos[casoAtualIndex];
+    
+    if (escolhaUsuario === casoAtual.eReal) {
+        pontuacao += 10;
+        scoreEl.innerText = pontuacao;
+        feedbackTitleEl.innerText = "🎯 Resposta Correta! Excelente Visão Crítica.";
+        feedbackTitleEl.style.color = "#10b981";
+    } else {
+        feedbackTitleEl.innerText = "❌ Alerta de Perigo! Você caiu no golpe.";
+        feedbackTitleEl.style.color = "#ef4444";
+    }
+    
+    feedbackTextEl.innerText = casoAtual.explicacao;
+    feedbackModal.classList.remove('hidden');
+}
+
+function proximoCaso() {
+    feedbackModal.classList.add('hidden');
+    casoAtualIndex++;
+    carregarCaso();
+}
+
+function finalizarJogo() {
+    gameCard.classList.add('hidden');
+    endCard.classList.remove('hidden');
+    
+    if (pontuacao === cenarioCasos.length * 10) {
+        finalMessageEl.innerText = `Pontuação máxima: ${pontuacao} pontos! Parabéns, você é um verdadeiro Detetive Digital e sabe se proteger da desinformação por IA!`;
+    } else {
+        finalMessageEl.innerText = `Você fez ${pontuacao} pontos. Continue estudando as práticas de Cidadania Digital para não ser enganado por mídias sintéticas!`;
+    }
+}
+
+function reiniciarJogo() {
+    casoAtualIndex = 0;
+    pontuacao = 0;
+    scoreEl.innerText = pontuacao;
+    endCard.classList.add('hidden');
+    gameCard.classList.remove('hidden');
+    carregarCaso();
+}
+
+// Inicia o jogo automaticamente ao abrir a página
+carregarCaso();
