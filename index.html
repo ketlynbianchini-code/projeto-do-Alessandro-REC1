@@ -93,3 +93,56 @@
     <script src="script.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detetive Digital: O Jogo da Verdade IA</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+    <header>
+        <h1>Detetive Digital</h1>
+        <p>Treine seus olhos e ouvidos contra as Deepfakes e a Desinformação!</p>
+    </header>
+
+    <main class="game-container">
+        <div class="game-status">
+            <div class="score-board">Pontuação: <span id="score">0</span></div>
+            <div class="progress-board">Caso: <span id="current-case">1</span>/3</div>
+        </div>
+
+        <div id="game-card" class="card">
+            <div class="scenario-badge">Cenário Suspeito</div>
+            <p id="scenario-text">Carregando caso...</p>
+            
+            <div class="choice-buttons">
+                <button class="btn btn-real" onclick="verificarEscolha(true)">🟢 É FATO (Real)</button>
+                <button class="btn btn-fake" onclick="verificarEscolha(false)">🔴 É FAKE (IA/Manipulado)</button>
+            </div>
+        </div>
+
+        <div id="feedback-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3 id="feedback-title">Resultado</h3>
+                <p id="feedback-text"></p>
+                <button class="btn-next" onclick="proximoCaso()">Próximo Caso &raquo;</button>
+            </div>
+        </div>
+
+        <div id="end-card" class="card hidden">
+            <h2>Investigação Concluída!</h2>
+            <p id="final-message"></p>
+            <button class="btn-restart" onclick="reiniciarJogo()">Jogar Novamente</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>Projeto de Educação Digital e IA - Compartilhe Conhecimento, Não Desinformação &copy; 2026</p>
+    </footer>
+
+    <script src="game.js"></script>
+</body>
+</html>
