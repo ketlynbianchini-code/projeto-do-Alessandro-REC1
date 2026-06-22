@@ -146,3 +146,92 @@
     <script src="game.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detetive Digital: Cidadania e IA</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <button id="theme-toggle" onclick="alternarTema()">🌓 Alternar Tema</button>
+        </div>
+        <h1>Detetive Digital</h1>
+        <p>Treine seus olhos e ouvidos contra as Deepfakes e a Desinformação!</p>
+    </header>
+
+    <main class="game-container">
+        
+        <section class="game-section">
+            <div class="game-status">
+                <div class="score-board">Pontuação: <span id="score">0</span></div>
+                <div class="timer-board">Tempo: <span id="timer">15</span>s</div>
+                <div class="progress-board">Caso: <span id="current-case">1</span>/3</div>
+            </div>
+
+            <div id="game-card" class="card">
+                <div class="scenario-badge">Cenário Suspeito</div>
+                <p id="scenario-text">Carregando caso...</p>
+                
+                <div class="choice-buttons">
+                    <button class="btn btn-real" onclick="verificarEscolha(true)">🟢 É FATO (Real)</button>
+                    <button class="btn btn-fake" onclick="verificarEscolha(false)">🔴 É FAKE (IA)</button>
+                </div>
+            </div>
+
+            <div id="feedback-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h3 id="feedback-title">Resultado</h3>
+                    <p id="feedback-text"></p>
+                    <button class="btn-next" onclick="proximoCaso()">Próximo Caso &raquo;</button>
+                </div>
+            </div>
+
+            <div id="end-card" class="card hidden">
+                <h2>Investigação Concluída!</h2>
+                <p id="final-message"></p>
+                <button class="btn-restart" onclick="reiniciarJogo()">Jogar Novamente</button>
+            </div>
+        </section>
+
+        <section class="guide-section">
+            <h2>🔎 Como Identificar uma Deepfake?</h2>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3>👀 Olhar Fixo</h3>
+                    <p>Rostos gerados por IA costumam piscar menos ou de forma muito artificial e mecânica.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>👄 Sincronia Labial</h3>
+                    <p>Preste atenção se o movimento dos lábios bate perfeitamente com o áudio que está saindo.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>⏳ Bordas Borradas</h3>
+                    <p>O contorno do rosto ou perto das orelhas costuma ficar "embaçado" durante movimentos rápidos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="sources-section">
+            <h2>🔗 Onde Checar Informações?</h2>
+            <p>Se ficou na dúvida, consulte quem entende do assunto antes de compartilhar:</p>
+            <div class="links-container">
+                <a href="https://g1.globo.com/fato-ou-fake/" target="_blank" class="source-link">Fato ou Fake (G1)</a>
+                <a href="https://pie.uol.com.br/" target="_blank" class="source-link">UOL Confere</a>
+                <a href="https://www.aosfatos.org/" target="_blank" class="source-link">Aos Fatos</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Projeto de Educação Digital e IA - Ferramenta Educativa &copy; 2026</p>
+    </footer>
+
+    <script src="game.js"></script>
+</body>
+</html>
