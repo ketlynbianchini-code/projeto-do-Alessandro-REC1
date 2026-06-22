@@ -180,6 +180,227 @@ function reiniciarJogo() {
     gameCard.classList.remove('hidden');
     carregarCaso();
 }
+const cenarioCasos = [
+    {
+        texto: "Você recebe um áudio do diretor da escola no WhatsApp pedindo para transferir urgentemente R$ 10,00 via Pix para manutenção das quadras. A voz parece perfeitamente a dele, mas o tom está um pouco robótico.",
+        eReal: false,
+        explicacao: "Isso é FAKE! Trata-se de uma clonagem de voz por IA (Deepfake de áudio). Escolas não pedem dinheiro urgente de forma informal em redes sociais."
+    },
+    {
+        texto: "O portal oficial do Ministério da Saúde (.gov.br) publica uma nota técnica assinada digitalmente por médicos confirmando o início de uma nova campanha nacional de vacinação nas escolas a partir de segunda-feira.",
+        eReal: true,
+        explicacao: "Isso é FATO! Informações vindas de canais institucionais oficiais com assinaturas verificáveis são seguras e confiáveis."
+    },
+    {
+        texto: "Viraliza um vídeo de um cientista famoso anunciando a cura de uma doença grave usando apenas limão. No vídeo, quando ele pisca, os olhos dele parecem duplicar e a boca não bate com o som.",
+        eReal: false,
+        explicacao: "Isso é FAKE! Sincronia labial desalinhada e falhas visuais ao piscar são os principais rastros deixados pelos algoritmos de Deepfake visuais."
+    }
+];
 
+let casoAtualIndex = 0;
+let pontuacao = 0;
+let tempoRestante = 15;
+let cronometro;
+
+const cenarioTextoEl = document.getElementById('scenario-text');
+const scoreEl = document.getElementById('score');
+const timerEl = document.getElementById('timer');
+const currentCaseEl = document.getElementById('current-case');
+const feedbackModal = document.getElementById('feedback-modal');
+const feedbackTitleEl = document.getElementById('feedback-title');
+const feedbackTextEl = document.getElementById('feedback-text');
+const gameCard = document.getElementById('game-card');
+const endCard = document.getElementById('end-card');
+const finalMessageEl = document.getElementById('final-message');
+
+// Função do Modo Escuro
+function alternarTema() {
+    document.body.classList.toggle('dark-theme');
+}
+
+function iniciarTimer() {
+    tempoRestante = 15;
+    timerEl.innerText = tempoRestante;
+    clearInterval(cronometro);
+    
+    cronometro = setInterval(() => {
+        tempoRestante--;
+        timerEl.innerText = tempoRestante;
+        
+        if (tempoRestance <= 0 || tempoRestante === 0) {
+            clearInterval(cronometro);
+            verificarEscolha(null, true); // Envia o sinal que o tempo acabou
+        }
+    }, 1000);
+}
+
+function carregarCaso() {
+    if (casoAtualIndex < cenarioCasos.length) {
+        cenarioTextoEl.innerText = cenarioCasos[casoAtualIndex].texto;
+        currentCaseEl.innerText = casoAtualIndex + 1;
+        iniciarTimer();
+    } else {
+        finalizarJogo();
+    }
+}
+
+function verificarEscolha(escolhaUsuario, tempoEsgotado = false) {
+    clearInterval(cronometro);
+    const casoAtual = cenarioCasos[casoAtualIndex];
+    
+    if (tempoEsgotado) {
+        feedbackTitleEl.innerText = "⏱️ O Tempo Acabou!";
+        feedbackTitleEl.style.color = "#ef4444";
+        feedbackTextEl.innerText = "Na internet, os golpes espalham-se rápido, mas precisamos de tempo para avaliar criticamente. " + casoAtual.explicacao;
+    } else if (escolhaUsuario === casoAtual.eReal) {
+        pontuacao += 10;
+        scoreEl.innerText = pontuacao;
+        feedbackTitleEl.innerText = "🎯 Resposta Correta!";
+        feedbackTitleEl.style.color = "#10b981";
+        feedbackTextEl.innerText = casoAtual.explicacao;
+    } else {
+        feedbackTitleEl.innerText = "❌ Alerta de Perigo!";
+        feedbackTitleEl.style.color = "#ef4444";
+        feedbackTextEl.innerText = casoAtual.explicacao;
+    }
+    
+    feedbackModal.classList.remove('hidden');
+}
+
+function proximoCaso() {
+    feedbackModal.classList.add('hidden');
+    casoAtualIndex++;
+    carregarCaso();
+}
+
+function finalizarJogo() {
+    gameCard.classList.add('hidden');
+    endCard.classList.remove('hidden');
+    finalMessageEl.innerText = `Você concluiu a simulação com ${pontuacao} pontos! Use as diretrizes aprendidas aqui para manter a comunidade escolar segura.`;
+}
+
+function reiniciarJogo() {
+    casoAtualIndex = 0;
+    pontuacao = 0;
+    scoreEl.innerText = pontuacao;
+    endCard.classList.add('hidden');
+    gameCard.classList.remove('hidden');
+    carregarCaso();
+}
+
+// Inicialização
+carregarCaso();
 // Inicia o jogo automaticamente ao abrir a página
+carregarCaso();
+const cenarioCasos = [
+    {
+        texto: "Você recebe um áudio do diretor da escola no WhatsApp pedindo para transferir urgentemente R$ 10,00 via Pix para manutenção das quadras. A voz parece perfeitamente a dele, mas o tom está um pouco robótico.",
+        eReal: false,
+        explicacao: "Isso é FAKE! Trata-se de uma clonagem de voz por IA (Deepfake de áudio). Escolas não pedem dinheiro urgente de forma informal em redes sociais."
+    },
+    {
+        texto: "O portal oficial do Ministério da Saúde (.gov.br) publica uma nota técnica assinada digitalmente por médicos confirmando o início de uma nova campanha nacional de vacinação nas escolas a partir de segunda-feira.",
+        eReal: true,
+        explicacao: "Isso é FATO! Informações vindas de canais institucionais oficiais com assinaturas verificáveis são seguras e confiáveis."
+    },
+    {
+        texto: "Viraliza um vídeo de um cientista famoso anunciando a cura de uma doença grave usando apenas limão. No vídeo, quando ele pisca, os olhos dele parecem duplicar e a boca não bate com o som.",
+        eReal: false,
+        explicacao: "Isso é FAKE! Sincronia labial desalinhada e falhas visuais ao piscar são os principais rastros deixados pelos algoritmos de Deepfake visuais."
+    }
+];
+
+let casoAtualIndex = 0;
+let pontuacao = 0;
+let tempoRestante = 15;
+let cronometro;
+
+const cenarioTextoEl = document.getElementById('scenario-text');
+const scoreEl = document.getElementById('score');
+const timerEl = document.getElementById('timer');
+const currentCaseEl = document.getElementById('current-case');
+const feedbackModal = document.getElementById('feedback-modal');
+const feedbackTitleEl = document.getElementById('feedback-title');
+const feedbackTextEl = document.getElementById('feedback-text');
+const gameCard = document.getElementById('game-card');
+const endCard = document.getElementById('end-card');
+const finalMessageEl = document.getElementById('final-message');
+
+// Função do Modo Escuro
+function alternarTema() {
+    document.body.classList.toggle('dark-theme');
+}
+
+function iniciarTimer() {
+    tempoRestante = 15;
+    timerEl.innerText = tempoRestante;
+    clearInterval(cronometro);
+    
+    cronometro = setInterval(() => {
+        tempoRestante--;
+        timerEl.innerText = tempoRestante;
+        
+        if (tempoRestance <= 0 || tempoRestante === 0) {
+            clearInterval(cronometro);
+            verificarEscolha(null, true); // Envia o sinal que o tempo acabou
+        }
+    }, 1000);
+}
+
+function carregarCaso() {
+    if (casoAtualIndex < cenarioCasos.length) {
+        cenarioTextoEl.innerText = cenarioCasos[casoAtualIndex].texto;
+        currentCaseEl.innerText = casoAtualIndex + 1;
+        iniciarTimer();
+    } else {
+        finalizarJogo();
+    }
+}
+
+function verificarEscolha(escolhaUsuario, tempoEsgotado = false) {
+    clearInterval(cronometro);
+    const casoAtual = cenarioCasos[casoAtualIndex];
+    
+    if (tempoEsgotado) {
+        feedbackTitleEl.innerText = "⏱️ O Tempo Acabou!";
+        feedbackTitleEl.style.color = "#ef4444";
+        feedbackTextEl.innerText = "Na internet, os golpes espalham-se rápido, mas precisamos de tempo para avaliar criticamente. " + casoAtual.explicacao;
+    } else if (escolhaUsuario === casoAtual.eReal) {
+        pontuacao += 10;
+        scoreEl.innerText = pontuacao;
+        feedbackTitleEl.innerText = "🎯 Resposta Correta!";
+        feedbackTitleEl.style.color = "#10b981";
+        feedbackTextEl.innerText = casoAtual.explicacao;
+    } else {
+        feedbackTitleEl.innerText = "❌ Alerta de Perigo!";
+        feedbackTitleEl.style.color = "#ef4444";
+        feedbackTextEl.innerText = casoAtual.explicacao;
+    }
+    
+    feedbackModal.classList.remove('hidden');
+}
+
+function proximoCaso() {
+    feedbackModal.classList.add('hidden');
+    casoAtualIndex++;
+    carregarCaso();
+}
+
+function finalizarJogo() {
+    gameCard.classList.add('hidden');
+    endCard.classList.remove('hidden');
+    finalMessageEl.innerText = `Você concluiu a simulação com ${pontuacao} pontos! Use as diretrizes aprendidas aqui para manter a comunidade escolar segura.`;
+}
+
+function reiniciarJogo() {
+    casoAtualIndex = 0;
+    pontuacao = 0;
+    scoreEl.innerText = pontuacao;
+    endCard.classList.add('hidden');
+    gameCard.classList.remove('hidden');
+    carregarCaso();
+}
+
+// Inicialização
 carregarCaso();
